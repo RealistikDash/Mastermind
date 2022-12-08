@@ -16,6 +16,8 @@ class Config:
     app_token: str = ""
     commands_prefix: str = ">>"
     log_level: str = "INFO"
+    music_max_length: int = 10800  # 3 hours
+    music_playlist_capacity: int = 100
 
 
 def read_config_json() -> dict[str, Any]:

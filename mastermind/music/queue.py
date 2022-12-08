@@ -14,7 +14,7 @@ class Queue:
         "order",
     )
 
-    def __init__(self, order: PlayOrder) -> None:
+    def __init__(self, order: PlayOrder = PlayOrder.SEQUENTIAL) -> None:
         self.songs: list[Song] = []
         self.current_song: Optional[Song] = None
         self.order = order
@@ -41,11 +41,11 @@ class Queue:
         if self.current_song is None:
             self.current_song = song
 
-    def remove_song_by_index(self, index: int) -> None:
+    def remove_song_by_index(self, index: int) -> Song:
         if self.current_song is self.songs[index]:
             self.end_current_song()
 
-        del self.songs[index]
+        return self.songs.pop(index)
 
     def next_song(self) -> Optional[Song]:
         self.end_current_song()
@@ -56,6 +56,7 @@ class Queue:
         if self.order is PlayOrder.SHUFFLE:
             new_song = random.choice(self.songs)
             self.start_new_song(new_song)
+
         elif self.order is PlayOrder.REPEAT:
             if self.current_song is None:
                 self.start_new_song(self.songs[0])

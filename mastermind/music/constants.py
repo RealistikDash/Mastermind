@@ -15,5 +15,7 @@ class PlayOrder(IntEnum):
 
 class MusicErrors(IntEnum):
     SUCCESS = auto()
-    PLAYLIST_CAPACITY_EXCEEDED = auto()
+    PLAYLIST_NOT_CREATED = auto()
+    PLAYLIST_FULL = auto()
     PLAYLIST_SONG_NOT_IN_QUEUE = auto()
+    PLAYLIST_EMPTY = auto()

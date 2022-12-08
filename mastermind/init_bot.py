@@ -4,13 +4,17 @@ import discord
 
 from mastermind import logger
 from mastermind.config import config
+from mastermind.discord.client import Mastermind
+from mastermind.discord.state import SharedState
 
 
-def init_bot() -> discord.Client:
+def init_bot() -> Mastermind:
     intents = discord.Intents.default()
     intents.message_content = True
 
-    bot = discord.Client(intents=intents)
+    state = SharedState.default()
+
+    bot = Mastermind(intents=intents, state=state)
 
     @bot.event
     async def on_ready() -> None:

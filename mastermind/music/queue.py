@@ -3,8 +3,6 @@ from __future__ import annotations
 import random
 from typing import Optional
 
-from mastermind.config import config
-from mastermind.music.constants import MusicErrors
 from mastermind.music.constants import PlayOrder
 from mastermind.music.song import Song
 
@@ -38,25 +36,16 @@ class Queue:
     def start_new_song(self, song: Song) -> None:
         self.current_song = song
 
-    def add_song(self, song: Song) -> MusicErrors:
-        if len(self.songs) >= config.music_playlist_capacity:
-            return MusicErrors.PLAYLIST_CAPACITY_EXCEEDED
-
+    def add_song(self, song: Song) -> None:
         self.songs.append(song)
         if self.current_song is None:
             self.current_song = song
 
-        return MusicErrors.SUCCESS
-
-    def remove_song_by_index(self, index: int) -> MusicErrors:
-        if index >= len(self.songs):
-            return MusicErrors.PLAYLIST_SONG_NOT_IN_QUEUE
-
+    def remove_song_by_index(self, index: int) -> None:
         if self.current_song is self.songs[index]:
             self.end_current_song()
 
         del self.songs[index]
-        return MusicErrors.SUCCESS
 
     def next_song(self) -> Optional[Song]:
         self.end_current_song()

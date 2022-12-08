@@ -14,6 +14,7 @@ from mastermind import logger
 @dataclass
 class Config:
     app_token: str = ""
+    commands_prefix: str = ">>"
     log_level: str = "INFO"
 
 
